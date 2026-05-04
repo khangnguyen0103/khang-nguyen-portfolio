@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import heroShape from "@/assets/hero-shape.png";
 
 const links = [
   { label: "About", href: "#about" },
@@ -15,8 +16,15 @@ const Header = () => {
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/60">
       <div className="container-editorial flex items-center justify-between h-16 md:h-20">
         <a href="#top" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-full bg-foreground text-background grid place-items-center font-serif text-lg">
-            K
+          <div className="relative w-10 h-10">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 rounded-full border border-warm/60 border-dashed"
+            />
+            <div className="absolute inset-[3px] rounded-full overflow-hidden bg-cream-deep">
+              <img src={heroShape} alt="Khang" className="w-full h-full object-cover" />
+            </div>
           </div>
           <span className="font-serif text-lg tracking-tight">Khang Nguyen</span>
         </a>
