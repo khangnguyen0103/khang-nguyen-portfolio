@@ -50,10 +50,11 @@ const AboutCards = () => {
                 isActive
                   ? {
                       scale: 1.6,
+                      x: `${(1 - i) * 108}%`,
                       zIndex: 50,
                       boxShadow: "0 30px 80px -20px hsl(var(--foreground) / 0.25)",
                     }
-                  : { scale: 1, zIndex: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" }
+                  : { scale: 1, x: "0%", zIndex: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" }
               }
               className="bg-cream-deep rounded-2xl p-8 border border-border/60 hover:border-warm/50 origin-center cursor-pointer relative"
             >
