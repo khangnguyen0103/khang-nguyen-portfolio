@@ -55,9 +55,7 @@ const AboutCards = () => {
                     }
                   : { scale: 1, zIndex: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" }
               }
-              transition-style={{ duration: 0.4 }}
-              className="bg-cream-deep rounded-2xl p-8 border border-border/60 hover:border-warm/50 origin-center cursor-pointer"
-              style={{ position: "relative" }}
+              className="bg-cream-deep rounded-2xl p-8 border border-border/60 hover:border-warm/50 origin-center cursor-pointer relative"
             >
               <div className="text-xs uppercase tracking-[0.2em] text-warm mb-5">
                 0{i + 1}
