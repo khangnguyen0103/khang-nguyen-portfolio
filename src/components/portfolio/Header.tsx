@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import heroShape from "@/assets/hero-shape.png";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 
 const links = [
   { label: "About", href: "#about" },
@@ -34,20 +35,24 @@ const Header = () => {
             <a
               key={l.href}
               href={l.href}
-              className="relative text-foreground/80 hover:text-foreground transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-foreground after:transition-all hover:after:w-full"
+              className="relative text-foreground/80 hover:text-foreground hover:-translate-y-0.5 transition-all after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-foreground after:transition-all hover:after:w-full"
             >
               {l.label}
             </a>
           ))}
+          <ThemeToggle />
         </nav>
 
-        <button
-          aria-label="Toggle menu"
-          className="md:hidden p-2"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            aria-label="Toggle menu"
+            className="p-2"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
