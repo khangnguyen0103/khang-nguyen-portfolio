@@ -1,57 +1,58 @@
-# Plan: Creative Refresh + Theme Switch
+## Goal
 
-Inspired by the vibe of the portfolios shared in that Reddit thread (Bruno Simon / Cassie Codes / Olivier Larose style — playful motion, strong typography, a clear day↔night switch), we'll level up animation polish and add a background/theme toggle.
+Push the portfolio from "polished but normal" into something memorable — the kind of editorial / award-style site where every section has its own identity, motion, and personality. Plus fix the current build error.
 
-## 1. Theme switch (light cream ↔ dark)
+## 0. Fix the build (prerequisite)
 
-- Add a `ThemeProvider` (small context, no extra deps) that toggles a `dark` class on `<html>` and persists to `localStorage`.
-- Extend `src/index.css` with a `.dark` block defining dark equivalents of the existing HSL tokens (deep charcoal `--background`, warm cream `--foreground`, dimmer `--warm`, etc.) so every component re-themes automatically.
-- Add a `ThemeToggle` button in `Header.tsx` (sun/moon icons from `lucide-react`) — animated icon crossfade + rotate using framer-motion. Mobile menu gets it too.
-- Update `tailwind.config.ts` to ensure `darkMode: ["class"]` (it already is in shadcn setups — verify).
+`framer-motion` v11 typing rejects `ease: [n,n,n,n]` widened to `number[]`. Add `as const` to every shared `quickReveal` constant in `Hero.tsx`, `Projects.tsx`, `AboutCards.tsx`, `AboutMe.tsx`, `Contact.tsx`. No behavior change.
 
-## 2. Creative animation upgrades
+## 1. Hero — cinematic intro
 
-**Global**
-- Custom cursor follower: small circle that lerps to the mouse, scales up on hover over links/buttons. Hidden on touch devices. New file `src/components/portfolio/Cursor.tsx`, mounted in `Index.tsx`.
-- Animated background layer: subtle moving radial gradient + grain (SVG noise) behind the hero, theme-aware. New file `src/components/portfolio/AnimatedBackground.tsx`.
+- **Letter-by-letter mask reveal** for "Khang Nguyen" — each glyph slides up from a clipped row with staggered delay (40ms per char), in italic serif. Adds a real "title sequence" feel.
+- **Floating eyebrow chips** ("Data Science", "ML", "Strategy") that drift slowly in the background behind the headline using `useMotionValue` + slow sine.
+- **Parallax portrait**: the photo tile tilts slightly toward the cursor (rotateX/Y up to ~6°) with a soft glow that follows the mouse — gives it a "card under glass" feel.
+- **Scroll-driven headline**: as the user scrolls down, the headline scales slightly and the subtitle fades, so the hero "compresses" into the page rather than just disappearing.
+- Replace the long bio block with a tighter, two-line lead and move the full bio into AboutMe so the hero breathes.
 
-**Hero**
-- Replace the simple word-by-word fade with a **letter mask reveal** ("I'm Khang Nguyen" letters slide up from behind a clip-path).
-- Add a slow floating motion to the warm "Nguyen," word.
-- Magnetic buttons: "See my work" / "Get in touch" gently follow the cursor when nearby.
+## 2. About cards — magnetic 3D tilt
 
-**Header**
-- Logo circle: on hover, the dashed ring speeds up and the inner image scales subtly.
-- Nav links: animated underline already exists — add a tiny vertical letter-shift on hover (`hover:-translate-y-0.5`).
+- Replace the current static cards with **3D tilt cards** (rotateX/Y based on cursor, ~8° max), with a soft warm gradient that follows the cursor inside each card.
+- Numbers ("01 / 02 / 03") become **oversized serif numerals** that sit half-behind the card, breaking the grid edge — editorial magazine style.
+- On hover, the card lifts and casts a colored shadow keyed off `--warm`.
 
-**Projects**
-- Replace the static cards with a scroll-driven reveal: each card slides in from alternating sides with a slight rotate, and the `01/02/03` numerals scale + fade as they enter the viewport (`useScroll` + `useTransform`).
-- On hover, an `ArrowUpRight` slides diagonally and a thin warm line draws across the bottom of the card.
+## 4. Projects — horizontal pinned scroll
 
-**New: Marquee strip**
-- Between AboutCards and Projects, add an infinite horizontal marquee of keywords ("Data · ML · Strategy · Python · SQL · Insight · …") in large serif italic — pure CSS `animate-[marquee_30s_linear_infinite]`. Adds movement without being noisy.
+Convert the projects list from vertical cards into a **horizontally pinned scroll section** (the page scroll-locks while projects slide in horizontally). Each project gets:
 
-## 3. Files
+- A big serif numeral (01 / 02 / 03) that animates in from offscreen.
+- A motion-blurred image / abstract gradient panel that scales as the card enters the viewport.
+- A "View Project" link with an animated underline draw and arrow that springs.
+- Smooth fallback on mobile (regular vertical stack — the pinned scroll only kicks in ≥ lg).
 
-```text
-NEW   src/components/theme/ThemeProvider.tsx
-NEW   src/components/theme/ThemeToggle.tsx
-NEW   src/components/portfolio/Cursor.tsx
-NEW   src/components/portfolio/AnimatedBackground.tsx
-NEW   src/components/portfolio/Marquee.tsx
-EDIT  src/index.css            (dark tokens, marquee keyframes, noise utility)
-EDIT  tailwind.config.ts       (confirm darkMode class, add marquee keyframes)
-EDIT  src/main.tsx             (wrap App in ThemeProvider)
-EDIT  src/pages/Index.tsx      (mount Cursor, AnimatedBackground, Marquee)
-EDIT  src/components/portfolio/Header.tsx   (ThemeToggle)
-EDIT  src/components/portfolio/Hero.tsx     (letter reveal, magnetic buttons)
-EDIT  src/components/portfolio/Projects.tsx (scroll-driven reveal, hover line)
-```
+Implementation: `useScroll` + `useTransform` on a tall outer wrapper; inner track translates X based on scroll progress.
 
-## 4. Notes
+## 6. Contact — interactive sign-off
 
-- All new motion respects `prefers-reduced-motion` (skip cursor + marquee, keep simple fades).
-- No new dependencies — `framer-motion` and `lucide-react` are already installed.
-- Theme persists across reloads; default = light cream (current look).
+- Replace the static heading with a **scramble-text effect** on "meaningful" (letters glitch through random chars before settling) on first reveal.
+- Email button becomes a **magnetic pill with copy-to-clipboard** ("Click to copy" → "Copied ✓" toast).
+- Social buttons get the same magnetic + 3D tilt treatment as About cards for consistency.
 
-Approve this and I'll implement it in one pass.
+## 7. Theme toggle upgrade
+
+Animate the toggle as a **morphing sun↔moon SVG** with a circular wipe of the page background when switching (radial-clip-path expanding from the toggle's position) — way more memorable than a snap swap.
+
+## Technical notes
+
+- All new motion uses `framer-motion` (already installed). No new deps required.
+- Respect `prefers-reduced-motion`: disable parallax, tilt, scramble, and pinned-scroll for users who request it.
+- Keep mobile experience clean — heavy effects (pinned scroll, 3D tilt, parallax) gate on `lg` breakpoint or pointer:fine.
+- Performance: throttle pointer-driven effects with `requestAnimationFrame`, use `will-change: transform` only on actively-animating nodes.
+
+## Files touched
+
+- Edit: `Hero.tsx`, `AboutCards.tsx`, `AboutMe.tsx`, `Projects.tsx`, `Contact.tsx`, `Marquee.tsx`, `Cursor.tsx`, `AnimatedBackground.tsx`, `ThemeToggle.tsx`, `index.css`, `pages/Index.tsx`.
+- New: `src/components/portfolio/SectionIndicator.tsx`, `src/components/portfolio/TiltCard.tsx`, `src/components/portfolio/ScrambleText.tsx`, `src/components/portfolio/SplitText.tsx`.
+
+## What you'll notice
+
+A site that feels designed, not templated: a title-sequence hero, tilting cards, horizontal projects, a scramble headline, a circular-wipe theme toggle, and a cursor that actually feels alive.

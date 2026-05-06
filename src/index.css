@@ -107,27 +107,21 @@
   .container-editorial {
     @apply max-w-[1180px] mx-auto px-6 md:px-10;
   }
-  .about-cards-backdrop {
-    opacity: 0;
-    transition: opacity 100ms ease-out;
-  }
-  .about-card {
-    transition:
-      transform 150ms ease-out,
-      border-color 150ms ease-out,
-      box-shadow 150ms ease-out;
-  }
   @media (hover: hover) and (pointer: fine) {
-    .about-cards-section:has(.about-card:hover) .about-cards-backdrop {
-      opacity: 1;
+    body {
+      cursor: none;
     }
-    .about-card {
-      will-change: transform;
-    }
-    .about-card:hover {
-      z-index: 50;
-      transform: translateX(var(--hover-shift)) scale(1.45);
-      box-shadow: 0 30px 80px -20px hsl(var(--foreground) / 0.25);
+    a, button, [data-cursor='hover'] {
+      cursor: none;
     }
   }
+}
+
+@keyframes marquee-l {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+@keyframes marquee-r {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
 }
