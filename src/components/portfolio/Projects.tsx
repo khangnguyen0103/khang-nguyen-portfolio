@@ -1,36 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { projects, type Project } from "@/data/projects";
 
 const quickReveal = { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
 
-const projects = [
-  {
-    n: "01",
-    title: "AI Model Selection System",
-    tag: "Machine Learning",
-    description:
-      "A machine learning idea that learns from metadata about datasets and recommends which algorithm may fit best — Logistic Regression, KNN, Decision Tree, Random Forest, or clustering.",
-    accent: "from-[hsl(var(--warm)/0.4)] to-[hsl(var(--accent)/0.3)]",
-  },
-  {
-    n: "02",
-    title: "DataFest Patient Journey",
-    tag: "Healthcare · Analytics",
-    description:
-      "Worked with 10M+ healthcare-style observations. Built tables, regressions, and visual insights to identify gaps in the patient journey.",
-    accent: "from-[hsl(var(--accent)/0.4)] to-[hsl(var(--warm-soft)/0.4)]",
-  },
-  {
-    n: "03",
-    title: "Business Dashboard + ML Insight",
-    tag: "Dashboards · Strategy",
-    description:
-      "A dashboard that turns raw CSV/database data into visual insight, variable importance, and strategy recommendations.",
-    accent: "from-[hsl(var(--warm-soft)/0.45)] to-[hsl(var(--warm)/0.4)]",
-  },
-];
-
-const ProjectCard = ({ p, i }: { p: typeof projects[number]; i: number }) => {
+const ProjectCard = ({ p, i }: { p: Project; i: number }) => {
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
@@ -67,8 +42,8 @@ const ProjectCard = ({ p, i }: { p: typeof projects[number]; i: number }) => {
           <p className="text-foreground/75 leading-relaxed max-w-2xl mb-8">
             {p.description}
           </p>
-          <a
-            href="#"
+          <Link
+            to={`/projects/${p.slug}`}
             className="inline-flex items-center gap-2 text-sm self-start relative pb-1"
           >
             <span className="relative">
@@ -80,7 +55,7 @@ const ProjectCard = ({ p, i }: { p: typeof projects[number]; i: number }) => {
               size={16}
               className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
             />
-          </a>
+          </Link>
         </div>
       </div>
       <span className="absolute left-0 bottom-0 h-px w-0 bg-warm transition-all duration-200 group-hover:w-full" />
@@ -102,7 +77,7 @@ const Projects = () => {
             </h2>
           </div>
           <span className="hidden md:block text-xs uppercase tracking-[0.25em] text-muted-foreground">
-            03 / Featured
+            05 / Featured
           </span>
         </div>
 
