@@ -1,37 +1,55 @@
-const rowA = ["Insight", "Analytics", "Curiosity", "Data", "Machine Learning", "Strategy"];
-const rowB = ["Python", "R", "SQL", "Storytelling", "Models", "Decisions"];
-
-const Row = ({ words, reverse = false, italic = false }: { words: string[]; reverse?: boolean; italic?: boolean }) => (
-  <div className="marquee-track group relative flex overflow-hidden">
-    <div
-      className={`flex shrink-0 items-center gap-10 md:gap-14 pr-10 md:pr-14 ${
-        reverse ? "animate-[marquee-r_38s_linear_infinite]" : "animate-[marquee-l_32s_linear_infinite]"
-      } group-hover:[animation-play-state:paused]`}
-    >
-      {[...words, ...words, ...words].map((w, i) => (
-        <span key={i} className="flex items-center gap-10 md:gap-14">
-          <span
-            className={`font-serif ${italic ? "italic" : ""} text-4xl md:text-6xl leading-none text-foreground/85 whitespace-nowrap`}
-          >
-            {w}
-          </span>
-          <span className="h-2 w-2 rounded-full bg-warm/70 shrink-0" aria-hidden />
-        </span>
-      ))}
-    </div>
-  </div>
-);
+const skillGroups = [
+  {
+    title: "Analyze",
+    skills: ["Insight", "Analytics", "Statistics", "Storytelling"],
+  },
+  {
+    title: "Build",
+    skills: ["Data", "Machine Learning", "Python", "R", "Excel", "Power BI", "Tableau"],
+  },
+  {
+    title: "Decide",
+    skills: ["Design", "Curiosity", "Strategy", "Dashboards"],
+  },
+];
 
 const Marquee = () => {
   return (
-    <section className="py-12 md:py-16 border-y border-border/60 bg-cream-deep/40 overflow-hidden">
-      <div className="space-y-3 md:space-y-5">
-        <Row words={rowA} italic />
-        <Row words={rowB} reverse />
+    <section className="py-14 md:py-20 border-y border-border/60 bg-cream-deep/40">
+      <div className="container-editorial">
+        <div className="grid gap-6 md:grid-cols-3">
+          {skillGroups.map((group) => (
+            <article
+              key={group.title}
+              className="rounded-2xl border border-border/60 bg-card/70 p-6"
+            >
+              <h2 className="font-serif italic text-3xl text-warm">
+                {group.title}
+              </h2>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-border/70 px-3 py-1.5 text-sm text-foreground/75"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mx-auto mt-10 max-w-3xl border-t border-border/70 pt-7 text-center">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-warm">
+            Working Method
+          </p>
+          <p className="mt-3 font-serif text-2xl md:text-4xl leading-tight text-foreground/85">
+            From messy questions to{" "}
+            <span className="italic text-warm">clear analysis</span>, useful
+            models, and decisions people can trust.
+          </p>
+        </div>
       </div>
-      <p className="container-editorial mx-auto mt-8 max-w-2xl text-center text-sm md:text-base leading-relaxed text-muted-foreground">
-        Turning questions into clean analysis, useful models, and decisions people can trust.
-      </p>
     </section>
   );
 };

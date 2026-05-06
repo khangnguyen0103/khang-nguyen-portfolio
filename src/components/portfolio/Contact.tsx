@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, FileText, Check, Copy } from "lucide-react";
 import { useState } from "react";
-import ScrambleText from "./ScrambleText";
 
-const easeOut = [0.22, 1, 0.36, 1] as const;
+const quickReveal = { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
 
 const buttons = [
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/khang-nguyen-1a97aa2b0" },
@@ -12,7 +11,6 @@ const buttons = [
 ];
 
 const Contact = () => {
-  const [inView, setInView] = useState(false);
   const [copied, setCopied] = useState(false);
   const email = "nkhang.work@gmail.com";
 
@@ -33,7 +31,7 @@ const Contact = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: easeOut }}
+          transition={quickReveal}
           className="text-xs uppercase tracking-[0.25em] text-warm mb-5"
         >
           — Contact
@@ -42,14 +40,11 @@ const Contact = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          onViewportEnter={() => setInView(true)}
-          transition={{ duration: 0.7, ease: easeOut }}
+          transition={quickReveal}
           className="font-serif text-4xl md:text-6xl leading-tight"
         >
           Let's build something{" "}
-          <span className="italic text-warm">
-            <ScrambleText text="meaningful" trigger={inView} />
-          </span>
+          <span className="italic text-warm">meaningful</span>
           .
         </motion.h2>
 
@@ -57,7 +52,7 @@ const Contact = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: easeOut, delay: 0.15 }}
+          transition={quickReveal}
           onClick={copyEmail}
           className="group mt-12 inline-flex items-center gap-3 px-7 py-4 rounded-full border border-border bg-card hover:border-warm/60 hover:bg-cream-deep transition-all"
         >
@@ -80,21 +75,25 @@ const Contact = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: easeOut, delay: 0.25 }}
+          transition={quickReveal}
           className="mt-10 flex flex-wrap justify-center gap-3"
         >
-          {buttons.map((b) => (
-            <a
-              key={b.label}
-              href={b.href}
-              target={b.href.startsWith("http") ? "_blank" : undefined}
-              rel={b.href.startsWith("http") ? "noreferrer" : undefined}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm hover:bg-foreground hover:text-background hover:border-foreground transition-all"
-            >
-              <b.icon size={16} />
-              {b.label}
-            </a>
-          ))}
+          {buttons.map((b) => {
+            const opensNewTab = b.href.startsWith("http") || b.label === "Resume";
+
+            return (
+              <a
+                key={b.label}
+                href={b.href}
+                target={opensNewTab ? "_blank" : undefined}
+                rel={opensNewTab ? "noreferrer" : undefined}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm hover:bg-foreground hover:text-background hover:border-foreground transition-all"
+              >
+                <b.icon size={16} />
+                {b.label}
+              </a>
+            );
+          })}
         </motion.div>
       </div>
     </section>

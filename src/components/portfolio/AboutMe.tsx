@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const easeOut = [0.22, 1, 0.36, 1] as const;
+const quickReveal = { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
 
 const AboutMe = () => {
   return (
@@ -10,7 +10,7 @@ const AboutMe = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: easeOut }}
+          transition={quickReveal}
           className="md:col-span-4"
         >
           <p className="text-xs uppercase tracking-[0.25em] text-warm mb-4">
@@ -25,7 +25,7 @@ const AboutMe = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: easeOut, delay: 0.1 }}
+          transition={quickReveal}
           className="md:col-span-7 md:col-start-6 space-y-6 text-foreground/80 leading-relaxed text-[1.05rem]"
         >
           <p>

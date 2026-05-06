@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import TiltCard from "./TiltCard";
 
-const easeOut = [0.22, 1, 0.36, 1] as const;
+const quickReveal = { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
 
 const cards = [
   {
@@ -28,32 +27,29 @@ const AboutCards = () => {
             key={c.title}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
-            transition={{ duration: 0.7, ease: easeOut, delay: i * 0.08 }}
+            viewport={{ once: true, margin: "0px 0px -24px 0px" }}
+            transition={quickReveal}
             className="group relative"
           >
-            {/* oversized magazine numeral */}
             <span
               aria-hidden
-              className="pointer-events-none absolute -top-10 -left-2 md:-left-4 font-serif italic text-[7rem] md:text-[9rem] leading-none text-warm/15 group-hover:text-warm/30 transition-colors duration-500 select-none"
+              className="pointer-events-none absolute -top-10 -left-2 md:-left-4 font-serif italic text-[7rem] md:text-[9rem] leading-none text-warm/15 group-hover:text-warm/30 transition-colors duration-200 select-none"
             >
               0{i + 1}
             </span>
 
-            <TiltCard className="h-full">
-              <div className="relative h-full bg-card rounded-2xl p-8 border border-border/60 group-hover:border-warm/60 transition-colors duration-300 overflow-hidden shadow-[0_20px_50px_-30px_hsl(var(--foreground)/0.2)] group-hover:shadow-[0_40px_80px_-30px_hsl(var(--warm)/0.35)]">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-warm mb-5">
-                  Card 0{i + 1}
-                </div>
-                <h3 className="font-serif text-2xl md:text-3xl mb-4 leading-snug">
-                  {c.title}
-                </h3>
-                <p className="text-foreground/75 leading-relaxed text-[0.95rem]">
-                  {c.body}
-                </p>
-                <span className="absolute left-0 bottom-0 h-px w-0 bg-warm transition-all duration-500 group-hover:w-full" />
+            <div className="relative h-full bg-card rounded-2xl p-8 border border-border/60 group-hover:border-warm/60 transition-colors duration-200 overflow-hidden shadow-[0_20px_50px_-30px_hsl(var(--foreground)/0.2)]">
+              <div className="text-[10px] uppercase tracking-[0.25em] text-warm mb-5">
+                0{i + 1}
               </div>
-            </TiltCard>
+              <h3 className="font-serif text-2xl md:text-3xl mb-4 leading-snug">
+                {c.title}
+              </h3>
+              <p className="text-foreground/75 leading-relaxed text-[0.95rem]">
+                {c.body}
+              </p>
+              <span className="absolute left-0 bottom-0 h-px w-0 bg-warm transition-all duration-200 group-hover:w-full" />
+            </div>
           </motion.div>
         ))}
       </div>

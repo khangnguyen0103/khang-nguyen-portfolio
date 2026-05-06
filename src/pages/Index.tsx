@@ -17,11 +17,19 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <AboutCards />
-        <Marquee />
-        <AboutMe />
-        <Projects />
-        <Contact />
+        <div className="relative bg-cream-deep/20 dark:bg-card/55">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 hidden dark:block bg-[linear-gradient(180deg,hsl(var(--card)/0.15),hsl(var(--background)/0.18)_38%,hsl(var(--card)/0.28))]"
+          />
+          <div className="relative">
+            <AboutCards />
+            <Marquee />
+            <AboutMe />
+            <Projects />
+            <Contact />
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
