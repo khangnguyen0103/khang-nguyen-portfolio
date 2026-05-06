@@ -1,62 +1,40 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import type { CSSProperties } from "react";
+import { motion } from "framer-motion";
+
+const quickReveal = { duration: 0.28, ease: [0.22, 1, 0.36, 1] };
 
 const cards = [
   {
     title: "My Approach to Work",
     body:
-      "I combine data science, machine learning, business thinking, and visualization to solve real problems. My process starts with understanding the question, cleaning and exploring the data, choosing the right model, and turning the results into practical decisions.",
+      "I bring together data science, machine learning, and business thinking to tackle real-world challenges. My process begins with defining the right questions, working through the data pipeline, and building models that deliver clear, actionable outcomes.",
   },
   {
     title: "My Roles",
-    body: "Data Scientist, ML Builder, Dashboard Designer, Business Problem Solver.",
+    body: "Data Scientist · Data Analyst · Business Analyst",
   },
   {
     title: "Education",
-    body: "Bachelor's Degree in Computer Science — Seattle Pacific University.",
+    body: "Pursuing a Bachelor's Degree in Data Science — Seattle Pacific University",
   },
 ];
 
 const AboutCards = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
-
   return (
-    <section className="py-20 md:py-28 relative">
-      <AnimatePresence>
-        {hovered !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-30 bg-background/40 backdrop-blur-md pointer-events-none"
-          />
-        )}
-      </AnimatePresence>
+    <section className="about-cards-section py-20 md:py-28 relative">
+      <div className="about-cards-backdrop fixed inset-0 z-30 bg-background/40 backdrop-blur-md pointer-events-none" />
 
       <div className="container-editorial grid md:grid-cols-3 gap-6 md:gap-8 relative">
         {cards.map((c, i) => {
-          const isActive = hovered === i;
           return (
             <motion.div
               key={c.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, delay: i * 0.1 }}
-              onHoverStart={() => setHovered(i)}
-              onHoverEnd={() => setHovered(null)}
-              animate={
-                isActive
-                  ? {
-                      scale: 1.6,
-                      x: `${(1 - i) * 108}%`,
-                      zIndex: 50,
-                      boxShadow: "0 30px 80px -20px hsl(var(--foreground) / 0.25)",
-                    }
-                  : { scale: 1, x: "0%", zIndex: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" }
-              }
-              className="bg-cream-deep rounded-2xl p-8 border border-border/60 hover:border-warm/50 origin-center cursor-pointer relative"
+              viewport={{ once: true, margin: "0px 0px -24px 0px" }}
+              transition={quickReveal}
+              style={{ "--hover-shift": `${(1 - i) * 108}%` } as CSSProperties}
+              className="about-card bg-cream-deep rounded-2xl p-8 border border-border/60 hover:border-warm/50 origin-center cursor-pointer relative z-10"
             >
               <div className="text-xs uppercase tracking-[0.2em] text-warm mb-5">
                 0{i + 1}

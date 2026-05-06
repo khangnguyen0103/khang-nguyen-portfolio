@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Data-driven systems that transform raw data into insight, strategy, and smarter decisions." />
     <meta name="twitter:image" content="https://khangnguyen.dev/og-image.png" />
 
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="sitemap" type="application/xml" href="/khang-nguyen-portfolio/sitemap.xml" />
 
     <script type="application/ld+json">
       {
@@ -42,10 +42,27 @@
         "sameAs": []
       }
     </script>
+    <script type="module">
+      const isLocal =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+
+      if (isLocal) {
+        import("/src/main.tsx");
+      } else {
+        const base = "/khang-nguyen-portfolio/";
+        const stylesheet = document.createElement("link");
+        stylesheet.rel = "stylesheet";
+        stylesheet.crossOrigin = "";
+        stylesheet.href = `${base}assets/main.css`;
+        document.head.append(stylesheet);
+
+        import(`${base}assets/main.js`);
+      }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

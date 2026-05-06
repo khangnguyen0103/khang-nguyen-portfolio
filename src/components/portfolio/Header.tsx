@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import heroShape from "@/assets/hero-shape.png";
+import profileImage from "@/assets/khang-profile.png";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 
 const links = [
@@ -24,7 +24,7 @@ const Header = () => {
               className="absolute inset-0 rounded-full border border-warm/60 border-dashed"
             />
             <div className="absolute inset-[3px] rounded-full overflow-hidden bg-cream-deep">
-              <img src={heroShape} alt="Khang" className="w-full h-full object-cover" />
+              <img src={profileImage} alt="Khang Nguyen" className="w-full h-full object-cover" />
             </div>
           </div>
           <span className="font-serif text-lg tracking-tight">Khang Nguyen</span>

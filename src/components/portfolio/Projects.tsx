@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
+const quickReveal = { duration: 0.28, ease: [0.22, 1, 0.36, 1] };
+
 const projects = [
   {
     n: "01",
@@ -44,15 +46,15 @@ const Projects = () => {
           {projects.map((p, i) => (
             <motion.article
               key={p.n}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60, rotate: i % 2 === 0 ? -1.5 : 1.5 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -12 : 12 }}
               whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative overflow-hidden bg-card rounded-2xl border border-border/60 p-8 md:p-10 transition-all hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_hsl(var(--warm)/0.35)] hover:border-warm/50"
+              viewport={{ once: true, margin: "0px 0px -24px 0px" }}
+              transition={quickReveal}
+              className="group relative overflow-hidden bg-card rounded-2xl border border-border/60 p-8 md:p-10 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_hsl(var(--warm)/0.35)] hover:border-warm/50"
             >
-              <span className="absolute left-0 bottom-0 h-px w-0 bg-warm transition-all duration-700 group-hover:w-full" />
+              <span className="absolute left-0 bottom-0 h-px w-0 bg-warm transition-all duration-300 group-hover:w-full" />
               <div className="grid md:grid-cols-12 gap-6 items-start">
-                <div className="md:col-span-2 font-serif text-3xl text-warm transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+                <div className="md:col-span-2 font-serif text-3xl text-warm transition-transform duration-200 group-hover:scale-110 group-hover:-translate-y-1">
                   {p.n}
                 </div>
                 <div className="md:col-span-7">
