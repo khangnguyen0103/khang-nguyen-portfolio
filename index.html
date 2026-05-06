@@ -51,13 +51,14 @@
         import("/src/main.tsx");
       } else {
         const base = "/khang-nguyen-portfolio/";
+        const assetVersion = "2026-05-06-project-pages";
         const stylesheet = document.createElement("link");
         stylesheet.rel = "stylesheet";
         stylesheet.crossOrigin = "";
-        stylesheet.href = `${base}assets/main.css`;
+        stylesheet.href = `${base}assets/main.css?v=${assetVersion}`;
         document.head.append(stylesheet);
 
-        import(/* @vite-ignore */ `${base}assets/main2.js`);
+        import(/* @vite-ignore */ `${base}assets/main2.js?v=${assetVersion}`);
       }
     </script>
   </head>
