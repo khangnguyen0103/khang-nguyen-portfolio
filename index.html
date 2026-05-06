@@ -42,7 +42,24 @@
         "sameAs": []
       }
     </script>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module">
+      const isLocal =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+
+      if (isLocal) {
+        import("/src/main.tsx");
+      } else {
+        const base = "/khang-nguyen-portfolio/";
+        const stylesheet = document.createElement("link");
+        stylesheet.rel = "stylesheet";
+        stylesheet.crossOrigin = "";
+        stylesheet.href = `${base}assets/main.css`;
+        document.head.append(stylesheet);
+
+        import(/* @vite-ignore */ `${base}assets/main2.js`);
+      }
+    </script>
   </head>
 
   <body>
