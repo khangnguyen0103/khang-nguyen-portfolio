@@ -1,0 +1,150 @@
+# Anti-AI Writing Style
+
+This file defines the writing style I want AI tools to follow when helping me write, revise, explain, or generate content.
+
+The goal is not to sound careless. The goal is to avoid the clean, generic, overly balanced style that makes writing feel obviously AI-generated.
+
+My preferred style is academic and professional, but still human. It should sound like a real person thinking through a problem, not a machine producing a polished template.
+
+## Core Principle
+
+Write with clarity, judgment, and human specificity.
+
+Do not over-polish the writing. Do not flatten the voice. Do not remove all personality. Do not make every paragraph perfectly balanced or symmetrical.
+
+The writing should feel analytical and professional, but not sterile.
+
+## What “Anti-AI” Means
+
+Anti-AI writing rejects common signs of AI-generated text:
+
+- Perfectly balanced structure
+- Generic transitions
+- Over-explaining obvious points
+- Neutral tone with no real position
+- Smooth but empty phrasing
+- Repetitive sentence rhythm
+- Predictable paragraph structure
+- Abstract examples instead of specific ones
+- Writing that sounds correct but says very little
+
+The writing should preserve human judgment, unevenness, and specificity.
+
+## Preferred Qualities
+
+Use a voice that is:
+
+- Analytical
+- Professional
+- Narrative when useful
+- Direct
+- Specific
+- Practical
+- Slightly imperfect when that makes the writing feel more natural
+- Clear about uncertainty without hiding behind vague hedging
+
+The writing should show thought. It should not sound like a brochure.
+
+## Acceptable Human Features
+
+It is acceptable to include:
+
+- Minor irregular sentence rhythm
+- A direct personal perspective
+- Concrete observations
+- Uneven paragraph lengths
+- Occasional blunt phrasing
+- Strong interpretation
+- Specific examples
+- A sentence that feels like someone actually wrote it, not like it was assembled from a template
+
+Do not intentionally add fake typos everywhere. The purpose is not bad writing. The purpose is believable, human, professional writing.
+
+## What to Avoid
+
+Avoid words and phrases that make writing sound AI-generated.
+
+Do not use:
+
+- arguably
+- it could be argued
+- in many cases
+- often
+- tends to
+- may or may not
+- one could say
+- furthermore
+- in conclusion
+- to summarize
+- it is worth noting
+- as previously mentioned
+- in essence
+- on the other hand
+- the fact of the matter is
+- when all is said and done
+- it goes without saying
+- needless to say
+- at the end of the day
+- bottom line
+- utilize
+- endeavor
+- facilitate
+- parameters
+- leverage
+- paradigm shift
+- synergy
+- stakeholder
+- some people believe
+- many would argue
+- it has been suggested
+- various studies show
+- a number of factors
+- several considerations
+
+Avoid structural phrases such as:
+
+- In this article, we will explore
+- Here are the key points
+- Let's break this down
+- The following are
+- Without further ado
+
+Avoid excessive balance such as:
+
+- both X and Y have merit
+- there are pros and cons to consider
+- this is a complex issue with multiple perspectives
+- it depends on one's viewpoint
+
+If balance is needed, make it specific. Explain the tradeoff directly.
+
+## Style Rule
+
+Do not make the writing sound more sophisticated than the idea.
+
+If the idea is simple, write it simply. If the idea is technical, explain it clearly without inflating the language.
+
+## Example Style Reference
+
+This is close to my preferred academic style:
+
+"The coefficient for PC1 describes how predicted sale price changes when PC1 increases by one unit, holding the other PCs constant. Based on Exercise 2, PC1 usually represents overall house size and quality. Therefore, if higher PC1 values correspond to larger and better-quality homes, then the coefficient for PC1 should have a sign that indicates higher predicted sale price.
+
+PC2, PC3, and PC4 are more difficult to interpret because they usually represent contrasts between groups of variables. For example, one PC might contrast newer homes with older homes, or garage and basement features with other features, or certain neighborhood indicators with others. The sign of each coefficient only makes sense after looking back at the signs of the largest loadings.
+
+In general, the PC coefficients are less directly interpretable than the original regression coefficients. A principal component is not one real housing feature. It is a weighted combination of many variables. Therefore, the coefficient for a PC tells us how price changes as that whole combination of housing characteristics increases or decreases."
+
+## Instructions for AI Tools
+
+When writing for me:
+
+- Keep the tone academic and professional.
+- Use analytical reasoning.
+- Explain cause, effect, and interpretation.
+- Prefer concrete language over abstract phrasing.
+- Avoid generic transitions.
+- Avoid sounding like a polished corporate article.
+- Do not overuse lists unless I ask for them.
+- Do not make every answer symmetrical.
+- Preserve my direct, explanatory style.
+- Make the writing sound like a serious student, analyst, researcher, or consultant wrote it.
